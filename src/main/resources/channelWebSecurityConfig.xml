@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:beans="http://www.springframework.org/schema/beans"
     xsi:schemaLocation="
 		http://www.springframework.org/schema/security 
         http://www.springframework.org/schema/security/spring-security-4.2.xsd
 		http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd"
->
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
     <http use-expressions="true">
         <intercept-url pattern="/anonymous*" access="isAnonymous()"/>
-        <intercept-url pattern="/login*" access="permitAll" requires-channel="https"/>
-        <intercept-url pattern="/perform_login" requires-channel="https"/>
-        <intercept-url pattern="/**" access="isAuthenticated()" requires-channel="https"/>
+        <intercept-url pattern="/login*" access="permitAll" requires-channel="http"/>
+        <intercept-url pattern="/perform_login" requires-channel="http"/>
+        <intercept-url pattern="/**" access="isAuthenticated()" requires-channel="http"/>
+        <custom-filter after="BASIC_AUTH_FILTER" ref="myFilter" />
 
         <csrf disabled="true"/>
 
@@ -33,5 +35,8 @@
             </user-service>
         </authentication-provider>
     </authentication-manager>
+    
+    
+   <beans:bean id="myFilter" class="com.ajeet.security.CustomFilter"/>
 
 </beans:beans>

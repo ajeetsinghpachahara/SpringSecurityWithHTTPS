@@ -12,8 +12,8 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 
 import com.ajeet.security.CustomLogoutSuccessHandler;
 
-@Configuration
-@ImportResource({ "classpath:channelWebSecurityConfig.xml" })
+/*@Configuration
+@ImportResource({ "classpath:channelWebSecurityConfig.xml" })*/
 /*@EnableWebSecurity
 @Profile("https")*/
 public class ChannelSecSecurityConfig// extends WebSecurityConfigurerAdapter
